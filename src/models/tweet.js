@@ -1,17 +1,26 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const tweetSchema = new mongoose.Schema({
+const tweetSchema = new mongoose.Schema(
+  {
     content: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     userEmail: {
-        type: String
-    }
-}, {
-    timestamps: true
-})
+      type: String,
+    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Tweet = mongoose.model('Tweet', tweetSchema)
+const Tweet = mongoose.model("Tweet", tweetSchema);
 
-module.exports = Tweet
+module.exports = Tweet;
