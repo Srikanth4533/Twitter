@@ -24,8 +24,12 @@ const setupAndStart = async () => {
     console.log(`Server is started on port ${PORT}`);
   });
 
-  const tweet = await tweetRepo.getWithComments("668bfef184a27fb28c35a284");
-  console.log(tweet);
+  let page = 0;
+  let perPage = 3;
+  let offSet = page * perPage;
+  let limit = perPage;
+  const tweet = await tweetRepo.getAll(offSet, limit);
+  console.log(tweet[0].contentWithEmail);
 
   process.on("unhandledRejection", (err) => {
     console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
