@@ -28,8 +28,12 @@ const setupAndStart = async () => {
   let perPage = 3;
   let offSet = page * perPage;
   let limit = perPage;
-  const tweet = await tweetRepo.getAll(offSet, limit);
-  console.log(tweet[0].contentWithEmail);
+  // const tweet = await tweetRepo.getAll(offSet, limit);
+  const tweet = await tweetRepo.create({
+    content: "With hooks",
+    userEmail: "hook@pre.com",
+  });
+  console.log(tweet);
 
   process.on("unhandledRejection", (err) => {
     console.log(`ErrorName: ${err.name}, Error: ${err.message}`);

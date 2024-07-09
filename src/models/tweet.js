@@ -21,8 +21,15 @@ const tweetSchema = new mongoose.Schema(
   }
 );
 
+// Virtuals
 tweetSchema.virtual("contentWithEmail").get(function process() {
   return `${this.content} \nCreated by: ${this.userEmail}`;
+});
+
+// Hooks
+tweetSchema.pre("save", function (next) {
+  this.content = this.content + ".....!";
+  next();
 });
 
 const Tweet = mongoose.model("Tweet", tweetSchema);
