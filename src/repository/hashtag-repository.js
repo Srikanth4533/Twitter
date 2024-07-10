@@ -60,6 +60,17 @@ class HashtagRepository {
       console.log(error);
     }
   }
+
+  async findByName(titleList) {
+    try {
+      const hashtags = await Hashtag.find({
+        title: titleList,
+      }).select("title -_id");
+      return hashtags;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = HashtagRepository;

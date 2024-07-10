@@ -2,11 +2,8 @@ const express = require("express");
 
 const { PORT } = require("./config/serverConfig");
 const { connect } = require("./config/db");
-const TweetRepository = require("./repository/tweet-repository");
-const Comment = require("./models/comment");
-const { HashtagRepository } = require("./repository");
-
-const tweetRepo = new TweetRepository();
+const { HashtagRepository, TweetRepository } = require("./repository");
+const TweetService = require("./services/tweet-service");
 
 process.on("uncaughtException", (err) => {
   console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
@@ -25,29 +22,12 @@ const setupAndStart = async () => {
     console.log(`Server is started on port ${PORT}`);
   });
 
-  const repo = new HashtagRepository();
-  await repo.bulkCreate([
-    {
-      title: "Trend",
-      tweets: [],
-    },
-    {
-      title: "Excited",
-      tweets: [],
-    },
-    {
-      title: "Python",
-      tweets: [],
-    },
-    {
-      title: "Fun",
-      tweets: [],
-    },
-    {
-      title: "Career",
-      tweets: [],
-    },
-  ]);
+  let service = new TweetService();
+  const tweet = await service.create({
+    content:
+      "This is after #processing really #excited, it is going to be #fun",
+  });
+  console.log(tweet);
 
   process.on("unhandledRejection", (err) => {
     console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
