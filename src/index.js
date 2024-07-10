@@ -24,17 +24,6 @@ const setupAndStart = async () => {
     console.log(`Server is started on port ${PORT}`);
   });
 
-  let page = 0;
-  let perPage = 3;
-  let offSet = page * perPage;
-  let limit = perPage;
-  // const tweet = await tweetRepo.getAll(offSet, limit);
-  const tweet = await tweetRepo.create({
-    content: "With hooks",
-    userEmail: "hook@pre.com",
-  });
-  console.log(tweet);
-
   process.on("unhandledRejection", (err) => {
     console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
     console.log(`Server shutting down due to Unhandled Promise Rejection`);
