@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 
-const { PORT } = require("./config/serverConfig");
-const { connect } = require("./config/db");
+import { connectDB } from "./config/db.js";
+import { PORT } from "./config/serverConfig.js";
 
 process.on("uncaughtException", (err) => {
   console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
@@ -11,7 +11,7 @@ process.on("uncaughtException", (err) => {
 });
 
 // DB connection
-connect();
+connectDB();
 
 const app = express();
 
