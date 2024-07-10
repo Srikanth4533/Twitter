@@ -13,7 +13,7 @@ class HashtagRepository {
   async bulkCreate(data) {
     try {
       const hashtags = await Hashtag.insertMany(data);
-      console.log(hashtags);
+      return hashtags;
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +65,7 @@ class HashtagRepository {
     try {
       const hashtags = await Hashtag.find({
         title: titleList,
-      }).select("title -_id");
+      });
       return hashtags;
     } catch (error) {
       console.log(error);
