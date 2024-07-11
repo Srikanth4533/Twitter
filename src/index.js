@@ -23,6 +23,8 @@ const setupAndStart = async () => {
     console.log(`Server is started on port ${PORT}`);
   });
 
+  await service.create({ content: "capital #CapCool #Satisfaction #Pleasure" });
+
   process.on("unhandledRejection", (err) => {
     console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
     console.log(`Server shutting down due to Unhandled Promise Rejection`);
