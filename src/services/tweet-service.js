@@ -1,4 +1,4 @@
-import { TweetRepository, HashtagRepository } from "../repository";
+import { TweetRepository, HashtagRepository } from "../repository/index.js";
 
 class TweetService {
   constructor() {
@@ -13,7 +13,7 @@ class TweetService {
     console.log(tags);
     const tweet = await this.tweetRepository.create(data);
     let alreadyPresentedTags = await this.hashtagRepository.findByName(tags);
-    console.log(alreadyPresentedTags);
+    // console.log(alreadyPresentedTags);
     let titleOfPresentTags = alreadyPresentedTags.map((tags) => tags.title);
     let newTags = tags.filter((tag) => !titleOfPresentTags.includes(tag));
     newTags = newTags.map((tag) => {

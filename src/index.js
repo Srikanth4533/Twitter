@@ -2,6 +2,9 @@ import express from "express";
 
 import { connectDB } from "./config/db.js";
 import { PORT } from "./config/serverConfig.js";
+import TweetService from "./services/tweet-service.js";
+
+const service = new TweetService();
 
 process.on("uncaughtException", (err) => {
   console.log(`ErrorName: ${err.name}, Error: ${err.message}`);
