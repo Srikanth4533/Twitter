@@ -1,8 +1,11 @@
 import express from "express";
+import bodyParser from "body-parser";
 
 import { connectDB } from "./config/db.js";
 import { PORT } from "./config/serverConfig.js";
 import TweetService from "./services/tweet-service.js";
+
+import apiRoutes from "./routes/index.js";
 
 const service = new TweetService();
 
@@ -17,6 +20,14 @@ process.on("uncaughtException", (err) => {
 connectDB();
 
 const app = express();
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+app.use("/api", apiRoutes);
 
 const setupAndStart = async () => {
   const server = app.listen(PORT, () => {
