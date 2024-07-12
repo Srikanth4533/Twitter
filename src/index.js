@@ -27,9 +27,8 @@ app.use(
   })
 );
 
-app.use("/api", apiRoutes);
-
 const setupAndStart = async () => {
+  app.use("/api", apiRoutes);
   const server = app.listen(PORT, () => {
     console.log(`Server is started on port ${PORT}`);
   });
