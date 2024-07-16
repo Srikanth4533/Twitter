@@ -1,8 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
+import passport from "passport";
 
 import { connectDB } from "./config/db.js";
 import { PORT } from "./config/serverConfig.js";
+import { passportAuth } from "./config/jwt-middleware.js";
 
 import apiRoutes from "./routes/index.js";
 
@@ -23,6 +25,9 @@ app.use(
     extended: true,
   })
 );
+
+app.use(passport.initialize());
+passportAuth(passport);
 
 const setupAndStart = async () => {
   app.use("/api", apiRoutes);
