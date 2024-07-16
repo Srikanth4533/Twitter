@@ -3,6 +3,7 @@ import CommentService from "../services/comment-service.js";
 const commentService = new CommentService();
 
 export const createComment = async (req, res) => {
+  console.log("Inside create comment", req.user);
   try {
     const response = await commentService.createComment(
       req.query.modelId,
@@ -10,6 +11,7 @@ export const createComment = async (req, res) => {
       req.user.id,
       req.body.content
     );
+    // console.log(response);
     return res.status(200).json({
       success: true,
       data: response,
