@@ -1,12 +1,12 @@
 import Like from "../models/like.js";
 import CrudRepository from "./crud-repository.js";
 
-class LikeRepository extends CrudRepository {
+class LikeRespository extends CrudRepository {
   constructor() {
     super(Like);
   }
 
-  async findUserByLikeable(data) {
+  async findByUserAndLikeable(data) {
     try {
       const like = await Like.findOne(data);
       return like;
@@ -16,4 +16,4 @@ class LikeRepository extends CrudRepository {
   }
 }
 
-export default LikeRepository;
+export default LikeRespository;
