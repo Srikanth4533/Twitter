@@ -32,6 +32,9 @@ class TweetRepository extends CrudRepository {
     try {
       const result = await Tweet.findById(id).populate({
         path: "likes",
+        populate: {
+          path: "likes",
+        },
       });
       return result;
     } catch (error) {
