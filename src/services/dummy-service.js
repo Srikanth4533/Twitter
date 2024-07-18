@@ -11,3 +11,8 @@ export const execute = () => {
     return "Learning ReactJS";
   }
 };
+
+export default {
+  helper,
+  execute,
+};
